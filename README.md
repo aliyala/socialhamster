@@ -1,0 +1,2 @@
+# socialhamster
+GraphQL Node server
