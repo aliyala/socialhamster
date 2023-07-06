@@ -19,28 +19,30 @@ const resolvers = {
     User: usersResolver.User,
     Post: postsResolver.Post,
     Comment: commentsResolver.Comment,
-  };
+};
 
-export async function startServer() {
-  const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    dataSources: () => ({
-      userDataSource: new UserDataSource(users),
-      commentDataSource: new CommentDataSource(comments),
-      postDataSource: new PostDataSource(posts),
-    }),
-    validationRules: [depthLimit(3)],
-  });
+export async function startServer(): Promise<ApolloServer> {
+    const server = new ApolloServer({
+        typeDefs,
+        resolvers,
+        dataSources: () => ({
+            userDataSource: new UserDataSource(users),
+            commentDataSource: new CommentDataSource(comments),
+            postDataSource: new PostDataSource(posts),
+        }),
+        validationRules: [depthLimit(4)],
+    });
 
-  await server.start();
+    await server.start();
 
-  const app = express();
+    const app = express();
 
-  server.applyMiddleware({ app });
+    server.applyMiddleware({ app });
 
-  const port = 3000;
-  app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}/graphql`);
-  });
+    const port = 3000;
+    app.listen(port, () => {
+        console.log(`Server running at http://localhost:${port}/graphql`);
+    });
+
+    return server;
 }
