@@ -14,10 +14,6 @@ export class CommentDataSource extends DataSource {
         );
     }
 
-    initialize() {
-        // Optional: Add any initialization logic here
-    }
-
     async batchLoadComments(commentIds: string[]): Promise<Comment[]> {
         const filteredComments = this.comments.filter((comment) =>
             commentIds.includes(comment.id),
@@ -40,7 +36,7 @@ export class CommentDataSource extends DataSource {
         return filteredComments;
     }
 
-    async getAllComments(): Promise<Comment[]> {
+    getAllComments(): Comment[] {
         return this.comments;
     }
 }

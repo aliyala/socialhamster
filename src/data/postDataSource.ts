@@ -14,10 +14,6 @@ export class PostDataSource extends DataSource {
         );
     }
 
-    initialize() {
-        // Optional: Add any initialization logic here
-    }
-
     async batchLoadPosts(postIds: string[]): Promise<Post[]> {
         const filteredPosts = this.posts.filter((post) =>
             postIds.includes(post.id),

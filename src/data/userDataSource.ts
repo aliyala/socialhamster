@@ -14,10 +14,6 @@ export class UserDataSource extends DataSource {
         );
     }
 
-    initialize() {
-        // Optional: Add any initialization logic here
-    }
-
     async batchLoadUsers(userIds: string[]): Promise<User[]> {
         const filteredUsers = this.users.filter((user) =>
             userIds.includes(user.id),
